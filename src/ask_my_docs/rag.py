@@ -36,7 +36,7 @@ class Answer:
     tokens: Iterator[str]
 
 
-class InkRecall:
+class AskMyDocs:
     def __init__(self, index_dir: Path, embedder: Embedder, chat: ChatModel):
         self.index_dir = index_dir
         self.embedder, self.chat = embedder, chat
@@ -55,6 +55,6 @@ class InkRecall:
         hits = self.retriever.retrieve(question, k=k)
         if not hits:
             return Answer(
-                hits=[], tokens=iter(["Your index is empty. Run `inkrecall ingest` first."])
+                hits=[], tokens=iter(["Your index is empty. Run `ask-my-docs ingest` first."])
             )
         return Answer(hits=hits, tokens=self.chat.stream(build_messages(question, hits, history)))

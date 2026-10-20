@@ -1,6 +1,6 @@
-# InkRecall
+# AskMyDocs
 
-**Chat with your PDFs and notes, 100% locally.** InkRecall is a retrieval-augmented generation (RAG) engine that combines dense embeddings with BM25 keyword search, fuses them with Reciprocal Rank Fusion, and answers with numbered citations back to the exact file and page.
+**Chat with your PDFs and notes, 100% locally.** AskMyDocs is a retrieval-augmented generation (RAG) engine that combines dense embeddings with BM25 keyword search, fuses them with Reciprocal Rank Fusion, and answers with numbered citations back to the exact file and page.
 
 No API keys. No cloud. Your documents never leave your machine.
 
@@ -11,7 +11,7 @@ No API keys. No cloud. Your documents never leave your machine.
 
 ## Why it's different
 
-| | Typical "chat with PDF" demo | InkRecall |
+| | Typical "chat with PDF" demo | AskMyDocs |
 |---|---|---|
 | Retrieval | vector search only | **hybrid**: vectors + BM25, fused with RRF |
 | Exact terms (invoice IDs, names) | often missed | caught by BM25 |
@@ -44,16 +44,16 @@ flowchart LR
 ollama pull qwen2.5:3b
 ollama pull nomic-embed-text
 
-# 2. Install InkRecall
-git clone https://github.com/Abbishekk-DGS/inkrecall && cd inkrecall
+# 2. Install AskMyDocs
+git clone https://github.com/Abbishekk-DGS/ask-my-docs && cd ask-my-docs
 uv sync --extra ui          # or: pip install -e ".[ui]"
 
 # 3. Index and ask
-uv run inkrecall ingest ~/Documents/papers
-uv run inkrecall ask "What datasets did the authors evaluate on?" --show-sources
+uv run ask-my-docs ingest ~/Documents/papers
+uv run ask-my-docs ask "What datasets did the authors evaluate on?" --show-sources
 
 # 4. Or use the chat UI
-uv run streamlit run src/inkrecall/app.py
+uv run streamlit run src/ask_my_docs/app.py
 ```
 
 Runs well on an 8 GB Apple Silicon laptop. Swap in a bigger model with `--model llama3.1:8b`.
@@ -69,14 +69,14 @@ Runs well on an 8 GB Apple Silicon laptop. Swap in a bigger model with `--model 
 ## Project layout
 
 ```
-src/inkrecall/
+src/ask_my_docs/
   loaders.py    PDF/Markdown/text → pages
   chunker.py    structure-aware chunking with stable content hashes
   bm25.py       Okapi BM25
   store.py      persistent vector store
   retriever.py  hybrid retrieval + RRF
-  rag.py        prompt building and the InkRecall facade
-  cli.py        `inkrecall ingest | ask | stats`
+  rag.py        prompt building and the AskMyDocs facade
+  cli.py        `ask-my-docs ingest | ask | stats`
   app.py        Streamlit chat UI
 tests/          runs offline with a deterministic hash embedder
 ```

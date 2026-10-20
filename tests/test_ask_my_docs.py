@@ -2,12 +2,12 @@ from pathlib import Path
 
 import numpy as np
 
-from inkrecall.bm25 import BM25
-from inkrecall.chunker import chunk_pages
-from inkrecall.llm import HashEmbedder
-from inkrecall.loaders import Page, load_path
-from inkrecall.rag import InkRecall, build_messages
-from inkrecall.retriever import rrf
+from ask_my_docs.bm25 import BM25
+from ask_my_docs.chunker import chunk_pages
+from ask_my_docs.llm import HashEmbedder
+from ask_my_docs.loaders import Page, load_path
+from ask_my_docs.rag import AskMyDocs, build_messages
+from ask_my_docs.retriever import rrf
 
 
 class EchoChat:
@@ -46,7 +46,7 @@ def test_end_to_end_ingest_and_ask(tmp_path: Path):
     )
     (docs / "cooking.txt").write_text("Boil pasta for nine minutes in salted water.")
     chat = EchoChat()
-    mind = InkRecall(tmp_path / "index", HashEmbedder(), chat)
+    mind = AskMyDocs(tmp_path / "index", HashEmbedder(), chat)
     assert mind.ingest(docs) == 2
     assert mind.ingest(docs) == 0  # idempotent
 
@@ -55,7 +55,7 @@ def test_end_to_end_ingest_and_ask(tmp_path: Path):
     assert answer.hits[0].chunk.source.endswith("solar.md")
     assert "25 years" in chat.last[-1]["content"]
 
-    reloaded = InkRecall(tmp_path / "index", HashEmbedder(), chat)
+    reloaded = AskMyDocs(tmp_path / "index", HashEmbedder(), chat)
     assert len(reloaded.store) == 2
 
 
@@ -63,7 +63,7 @@ def test_prompt_numbers_passages(tmp_path: Path):
     (tmp_path / "a.txt").write_text("alpha beta")
     pages = load_path(tmp_path)
     assert pages[0].text == "alpha beta"
-    from inkrecall.retriever import Hit
+    from ask_my_docs.retriever import Hit
 
     hits = [Hit(c, 1.0, 1, 1) for c in chunk_pages(pages)]
     messages = build_messages("q", hits)

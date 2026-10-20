@@ -1,4 +1,4 @@
-"""Command line: `inkrecall ingest <path>` and `inkrecall ask "<question>"`."""
+"""Command line: `ask-my-docs ingest <path>` and `ask-my-docs ask "<question>"`."""
 
 from __future__ import annotations
 
@@ -8,13 +8,13 @@ from pathlib import Path
 
 from . import __version__
 from .llm import OllamaChat, OllamaEmbedder
-from .rag import InkRecall
+from .rag import AskMyDocs
 
-DEFAULT_INDEX = Path.home() / ".inkrecall" / "index"
+DEFAULT_INDEX = Path.home() / ".ask-my-docs" / "index"
 
 
-def build(args: argparse.Namespace) -> InkRecall:
-    return InkRecall(
+def build(args: argparse.Namespace) -> AskMyDocs:
+    return AskMyDocs(
         Path(args.index),
         OllamaEmbedder(model=args.embed_model),
         OllamaChat(model=args.model),
@@ -22,7 +22,7 @@ def build(args: argparse.Namespace) -> InkRecall:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="inkrecall", description=__doc__)
+    parser = argparse.ArgumentParser(prog="ask-my-docs", description=__doc__)
     parser.add_argument(
         "--version",
         action="version",
