@@ -1,4 +1,4 @@
-"""Command line: `docmind ingest <path>` and `docmind ask "<question>"`."""
+"""Command line: `inkrecall ingest <path>` and `inkrecall ask "<question>"`."""
 
 from __future__ import annotations
 
@@ -8,13 +8,13 @@ from pathlib import Path
 
 from . import __version__
 from .llm import OllamaChat, OllamaEmbedder
-from .rag import DocMind
+from .rag import InkRecall
 
-DEFAULT_INDEX = Path.home() / ".docmind" / "index"
+DEFAULT_INDEX = Path.home() / ".inkrecall" / "index"
 
 
-def build(args: argparse.Namespace) -> DocMind:
-    return DocMind(
+def build(args: argparse.Namespace) -> InkRecall:
+    return InkRecall(
         Path(args.index),
         OllamaEmbedder(model=args.embed_model),
         OllamaChat(model=args.model),
@@ -22,7 +22,7 @@ def build(args: argparse.Namespace) -> DocMind:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="docmind", description=__doc__)
+    parser = argparse.ArgumentParser(prog="inkrecall", description=__doc__)
     parser.add_argument(
         "--version",
         action="version",

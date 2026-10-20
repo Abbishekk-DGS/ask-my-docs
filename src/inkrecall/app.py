@@ -1,4 +1,4 @@
-"""Streamlit chat UI. Run with: streamlit run src/docmind/app.py"""
+"""Streamlit chat UI. Run with: streamlit run src/inkrecall/app.py"""
 
 from __future__ import annotations
 
@@ -7,14 +7,14 @@ from pathlib import Path
 
 import streamlit as st
 
-from docmind.cli import DEFAULT_INDEX
-from docmind.llm import OllamaChat, OllamaEmbedder
-from docmind.rag import DocMind
+from inkrecall.cli import DEFAULT_INDEX
+from inkrecall.llm import OllamaChat, OllamaEmbedder
+from inkrecall.rag import InkRecall
 
-st.set_page_config(page_title="DocMind", page_icon="📚", layout="wide")
+st.set_page_config(page_title="InkRecall", page_icon="📚", layout="wide")
 
 with st.sidebar:
-    st.title("DocMind")
+    st.title("InkRecall")
     st.caption("Private RAG. Your documents never leave this machine.")
     st.caption("Built by [Abbishekk DGS](https://abbishekkdgs.tech)")
     model = st.text_input("Chat model", "qwen2.5:3b")
@@ -23,8 +23,8 @@ with st.sidebar:
 
 
 @st.cache_resource
-def get_mind(model: str, embed_model: str) -> DocMind:
-    return DocMind(DEFAULT_INDEX, OllamaEmbedder(embed_model), OllamaChat(model))
+def get_mind(model: str, embed_model: str) -> InkRecall:
+    return InkRecall(DEFAULT_INDEX, OllamaEmbedder(embed_model), OllamaChat(model))
 
 
 mind = get_mind(model, embed_model)
