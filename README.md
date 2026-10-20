@@ -6,6 +6,9 @@ No API keys. No cloud. Your documents never leave your machine.
 
 ![python](https://img.shields.io/badge/python-3.11+-blue) ![license](https://img.shields.io/badge/license-MIT-green) ![runs](https://img.shields.io/badge/runs-offline-black)
 
+<!-- author-banner -->
+> **Project 01 of 20** in my AI build series, designed and built by **[Abbishekk DGS](https://abbishekkdgs.tech)**. [See all projects →](https://github.com/Abbishekk-DGS)
+
 ## Why it's different
 
 | | Typical "chat with PDF" demo | DocMind |
@@ -91,6 +94,10 @@ uv run ruff check .
 - [ ] Cross-encoder reranking (`bge-reranker`)
 - [ ] OCR fallback for scanned PDFs
 - [ ] Incremental re-index on file change
+
+## About the author
+
+Built by **Abbishekk DGS**. More of my work at **[abbishekkdgs.tech](https://abbishekkdgs.tech)** and on **[GitHub](https://github.com/Abbishekk-DGS)**.
 
 ## License
 

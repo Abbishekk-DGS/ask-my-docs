@@ -6,6 +6,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from . import __version__
 from .llm import OllamaChat, OllamaEmbedder
 from .rag import DocMind
 
@@ -22,6 +23,11 @@ def build(args: argparse.Namespace) -> DocMind:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="docmind", description=__doc__)
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {__version__} · by Abbishekk DGS · abbishekkdgs.tech",
+    )
     parser.add_argument("--index", default=str(DEFAULT_INDEX), help="index directory")
     parser.add_argument("--model", default="qwen2.5:3b", help="Ollama chat model")
     parser.add_argument("--embed-model", default="nomic-embed-text", help="Ollama embedding model")

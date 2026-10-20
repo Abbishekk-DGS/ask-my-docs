@@ -16,6 +16,7 @@ st.set_page_config(page_title="DocMind", page_icon="📚", layout="wide")
 with st.sidebar:
     st.title("DocMind")
     st.caption("Private RAG. Your documents never leave this machine.")
+    st.caption("Built by [Abbishekk DGS](https://abbishekkdgs.tech)")
     model = st.text_input("Chat model", "qwen2.5:3b")
     embed_model = st.text_input("Embedding model", "nomic-embed-text")
     k = st.slider("Passages per answer", 2, 12, 5)
