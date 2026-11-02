@@ -9,6 +9,38 @@ No API keys. No cloud. Your documents never leave your machine.
 <!-- author-banner -->
 > **Project 01 of 20** in my AI build series, designed and built by **[Abbishekk DGS](https://abbishekkdgs.tech)**. [See all projects →](https://github.com/Abbishekk-DGS)
 
+<!-- overview:start -->
+## Overview
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/overview-dark.svg">
+  <img alt="ask-my-docs overview: how it works and its output. Key numbers: Hybrid vectors + BM25; [n] citations required by prompt; 40 word chunk overlap; 8 GB laptop is enough. Stack: Python · Ollama · nomic-embed-text · BM25 · numpy · pypdf · Streamlit." src="docs/overview-light.svg" width="100%">
+</picture>
+
+## Interface
+
+You can use it from the terminal or from a chat app in the browser.
+
+### Terminal
+
+| Command | What it does | Options |
+|---|---|---|
+| `ask-my-docs ingest <path>` | Indexes a file or folder | |
+| `ask-my-docs ask "<question>"` | Answers from your documents | `-k` passages (default 5), `--show-sources` |
+| `ask-my-docs stats` | Shows the index size | |
+
+These go before the command: `--index`, `--model` (default `qwen2.5:3b`) and `--embed-model` (default `nomic-embed-text`).
+
+### Chat app
+
+Install it with `uv sync --extra ui`, then start it with `uv run streamlit run src/ask_my_docs/app.py`.
+
+| Area | Controls |
+|---|---|
+| Sidebar | Chat model, embedding model, passages per answer (2 to 12), upload PDF, Markdown or text files, **Index uploads**, chunks indexed |
+| Main | Chat box with streamed answers, and a collapsible **Sources** panel under the newest answer showing each citation and passage |
+<!-- overview:end -->
+
 ## Why it's different
 
 | | Typical "chat with PDF" demo | AskMyDocs |
